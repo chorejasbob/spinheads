@@ -39,12 +39,12 @@ def build_cloud_server(count):
     print("Cloud server images: ")
     listerator(cs.images.list())
     i_args.image = raw_input("Enter image number:")
-  i_args.image = cs.images.list()[int(i_args.image)]
+  i_args.image = cs.images.list()[i_args.image]
   if not i_args.flavor:
     print("Cloud server flavors: ")
     listerator(cs.flavors.list())
     i_args.flavor = raw_input("Enter flavor number:")
-  i_args.flavor = cs.flavors.list()[int(i_args.flavor)]
+  i_args.flavor = cs.flavors.list()[i_args.flavor]
   server = cs.servers.create(i_args.name, i_args.image, i_args.flavor)
   print("Name:", server.name)
   print("ID:", server.id)
