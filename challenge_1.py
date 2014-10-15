@@ -9,8 +9,8 @@ def arg_input():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--name", required=True, help="The base name of the Cloud Server, e.g. Web")
     parser.add_argument("-c", "--count", required=True, type=int, help="Number of server to build")
-    parser.add_argument("-i", "--image", required=True, type=int, help="The image that you would like to use")
-    parser.add_argument("-f", "--flavor", required=True, type=int, help="The server flavor")
+    parser.add_argument("-i", "--image", type=int, help="The image that you would like to use")
+    parser.add_argument("-f", "--flavor", type=int, help="The server flavor")
     parser.add_argument("-r", "--region", default='DFW', help="Region")
     my_args = parser.parse_args()
     my_args.region = my_args.region.upper()
@@ -39,12 +39,12 @@ def build_cloud_server(count):
     print("Cloud server images: ")
     listerator(cs.images.list())
     i_args.image = raw_input("Enter image number:")
-  i_args.image = cs.images.list()[i_args.image]
+  i_args.image = cs.images.list()[int(i_args.image)]
   if not i_args.flavor:
     print("Cloud server flavors: ")
     listerator(cs.flavors.list())
     i_args.flavor = raw_input("Enter flavor number:")
-  i_args.flavor = cs.flavors.list()[i_args.flavor]
+  i_args.flavor = cs.flavors.list()[int(i_args.flavor)]
   server = cs.servers.create(i_args.name, i_args.image, i_args.flavor)
   print("Name:", server.name)
   print("ID:", server.id)
